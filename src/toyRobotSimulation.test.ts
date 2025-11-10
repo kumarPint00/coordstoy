@@ -113,47 +113,12 @@ describe("toyRobotSimulation", () => {
     })
   })
 
-  test("should place obstacle at valid position", () => {
-    const simulation = fiveByFiveTable();
-    simulation.placeObstacle({ x: 2, y: 2 });
-    expect(simulation.getObstacles()).toContainEqual({ x: 2, y: 2 });
-  })
-
-  test("should not place obstacle at invalid position", () => {
-    const simulation = fiveByFiveTable();
-    simulation.placeObstacle({ x: -1, y: 2 });
-    simulation.placeObstacle({ x: 5, y: 2 });
-    expect(simulation.getObstacles()).toHaveLength(0);
-  })
-
-  test("should not place duplicate obstacles", () => {
-    const simulation = fiveByFiveTable();
-    simulation.placeObstacle({ x: 2, y: 2 });
-    simulation.placeObstacle({ x: 2, y: 2 });
-    expect(simulation.getObstacles()).toHaveLength(1);
-  })
-
-  test("should not place robot on obstacle", () => {
-    const simulation = fiveByFiveTable();
-    simulation.placeObstacle({ x: 0, y: 0 });
-    simulation.placeRobot(originPosition());
-    expect(simulation.getRobot()).toBeUndefined();
-  })
-
-  test("should not move robot into obstacle", () => {
-    const simulation = fiveByFiveTable();
-    simulation.placeRobot(originPosition());
-    simulation.placeObstacle({ x: 0, y: 1 });
-    simulation.moveRobot();
-    expect(simulation.getRobot()).toEqual(originPosition());
-  })
-
 })
 
 const invalidPosition = (): Position => ({
   x: -1,
   y: -1,
-  orientation: Orientation.NORTH
+  orientation: -1
 })
 
 const originPosition = (): Position => ({

@@ -5,8 +5,3 @@ export interface Position {
   y: number
   orientation: Orientation
 }
-
-export interface Coordinate {
-  x: number
-  y: number
-}

@@ -7,7 +7,6 @@ export const toyRobotSimulationCommandAdaptor = (toyRobotSimulation: ToyRobotSim
     const command = commandString.split(" ")[0];
     switch (command) {
       case "PLACE": return place(commandString);
-      case "PLACE_OBSTACLE": return placeObstacle(commandString);
       case "MOVE": return toyRobotSimulation.moveRobot();
       case "LEFT": return toyRobotSimulation.turnRobotLeft();
       case "RIGHT": return toyRobotSimulation.turnRobotRight();
@@ -22,16 +21,6 @@ export const toyRobotSimulationCommandAdaptor = (toyRobotSimulation: ToyRobotSim
         x: parseInt(match[1], 10),
         y: parseInt(match[2], 10),
         orientation: Orientation[match[3] as keyof typeof Orientation]
-      })
-    }
-  }
-
-  const placeObstacle = (commandString: string): void => {
-    const match = commandString.match(/PLACE_OBSTACLE (\d+),(\d+)/);
-    if (match) {
-      toyRobotSimulation.placeObstacle({
-        x: parseInt(match[1], 10),
-        y: parseInt(match[2], 10)
       })
     }
   }

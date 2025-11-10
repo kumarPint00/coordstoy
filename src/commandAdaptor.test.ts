@@ -23,21 +23,6 @@ describe("integration", () => {
         "REPORT", "3,3,NORTH\n")
   })
 
-  test("should block robot movement with obstacle", () => {
-    runAndCompareOutput("PLACE 0,0,NORTH\n" +
-        "PLACE_OBSTACLE 0,1\n" +
-        "MOVE\n" +
-        "REPORT", "0,0,NORTH\n")
-  })
-
-  test("should place robot around obstacle", () => {
-    runAndCompareOutput("PLACE_OBSTACLE 1,1\n" +
-        "PLACE 0,0,EAST\n" +
-        "MOVE\n" +
-        "MOVE\n" +
-        "REPORT", "2,0,EAST\n")
-  })
-
 })
 
 const runAndCompareOutput = (input: string, expectedOutput: string) => {

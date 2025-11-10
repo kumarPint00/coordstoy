@@ -1,4 +1,4 @@
-import {Position, Coordinate} from "./position";
+import {Position} from "./position";
 import {forwardMovement, left, right} from "./orientation";
 
 const DEFAULT_TABLE_SIZE = 5;
@@ -18,12 +18,10 @@ export class ToyRobotSimulation {
   private readonly tableSizeX: number
   private readonly tableSizeY: number
   private robot: Position | undefined
-  private obstacles: Coordinate[]
 
   constructor(tableSizeX?: number, tableSizeY?: number) {
     this.tableSizeX = tableSizeX ?? DEFAULT_TABLE_SIZE
     this.tableSizeY = tableSizeY ?? DEFAULT_TABLE_SIZE
-    this.obstacles = []
   }
 
   placeRobot(position: Position): void {
@@ -63,31 +61,11 @@ export class ToyRobotSimulation {
     return this.robot;
   }
 
-  placeObstacle(coordinate: Coordinate): void {
-    if (this.isCoordinateValid(coordinate) && !this.hasObstacleAt(coordinate)) {
-      this.obstacles.push(coordinate)
-    }
-  }
-
-  getObstacles(): Coordinate[] {
-    return [...this.obstacles];
-  }
-
   isPositionValid(position: Position): boolean {
-    return this.isCoordinateValid(position) && !this.hasObstacleAt(position);
-  }
-
-  private isCoordinateValid(coordinate: Coordinate): boolean {
-    return coordinate.x >= 0 &&
-        coordinate.x < this.tableSizeX &&
-        coordinate.y >= 0 &&
-        coordinate.y < this.tableSizeY;
-  }
-
-  private hasObstacleAt(coordinate: Coordinate): boolean {
-    return this.obstacles.some(obstacle => 
-      obstacle.x === coordinate.x && obstacle.y === coordinate.y
-    );
+    return position.x >= 0 &&
+        position.x < this.tableSizeX &&
+        position.y >= 0 &&
+        position.y < this.tableSizeY;
   }
 
 }
